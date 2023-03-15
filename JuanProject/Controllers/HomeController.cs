@@ -25,10 +25,12 @@ namespace JuanProject.Controllers
                 .Include(m=>m.ProductImages)
                 .Take(5)
                 .ToListAsync();
+
             HomeVM homeVM = new HomeVM()
             { 
                 Sliders = sliders,
                 Products= products,
+                Blogs =  await _context.Blogs.ToListAsync(),
             };
 
             return View(homeVM);    
