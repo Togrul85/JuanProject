@@ -65,5 +65,16 @@ namespace JuanProject.Controllers
             _context.SaveChanges();
             return RedirectToAction("detail",new {id=blogId});
         }
+        public async Task<IActionResult>DeleteComment(int id)
+        {
+            var comment  =  _context.Comments.FirstOrDefault(c => c.Id == id);
+         var result =   _context.ChangeTracker.Entries();
+            _context.Comments.Remove(comment);
+            _context.SaveChanges();
+            return RedirectToAction("detail" , new { id = comment.BlogId });    
+
+
+
+        }
     }
 }
