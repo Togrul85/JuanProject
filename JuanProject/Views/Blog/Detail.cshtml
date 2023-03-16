@@ -61,11 +61,11 @@
                         <div class="blog-widget">
                             <h4 class="blog-widget-title">Recent Posts</h4>
                             <ul class="recent-posts-inner">
-                               @foreach (var item in Model.Blogs)
+                                @foreach (var item in Model.Blogs)
                                 {
                                     <li class="recent-posts">
                                         <div class="recent-posts-image">
-                                            <a asp-action="detail" asp-route-id ="@item.Id"><img src="assets/img/blog/@item.ImageUrl" alt="post thumb"></a>
+                                            <a asp-action="detail" asp-route-id="@item.Id"><img src="assets/img/blog/@item.ImageUrl" alt="post thumb"></a>
                                         </div>
                                         <div class="recent-posts-body">
                                             <span class="recent-posts-meta">@item.CreatedDate.ToString("MM/dd/yyyy")</span>
@@ -73,14 +73,14 @@
                                         </div>
                                     </li>
                                 }
-                              
-                                    <div class="recent-posts-image">
-                                        <a href="blog-details.html"><img src="assets/img/blog/recent-03.jpg" alt="post thumb"></a>
-                                    </div>
-                                    <div class="recent-posts-body">
-                                        <span class="recent-posts-meta">February  13,  2018</span>
-                                        <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose This is demo</a></h6>
-                                    </div>
+
+                                <div class="recent-posts-image">
+                                    <a href="blog-details.html"><img src="assets/img/blog/recent-03.jpg" alt="post thumb"></a>
+                                </div>
+                                <div class="recent-posts-body">
+                                    <span class="recent-posts-meta">February  13,  2018</span>
+                                    <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose This is demo</a></h6>
+                                </div>
                                 </li>
                                 <li class="recent-posts">
                                     <div class="recent-posts-image">
@@ -136,10 +136,10 @@
                                     <ul class="blog-meta">
                                         <li><span>By: </span>@Model.Blog.AuthorName</li>
                                         <li><span>On: </span>@Model.Blog.CreatedDate.ToString("MM/dd/yyyy")</li>
-                                    </ul>                        
-                                   
+                                    </ul>
+
                                     <p>
-                                       @Model.Blog.Desc
+                                        @Model.Blog.Desc
                                     </p>
                                 </div>
                             </div>
@@ -148,14 +148,23 @@
                             <div class="comment-section section-padding">
                                 <h5>@Model.Blog.Comments.Count Comment</h5>
                                 <ul>
-                                   @foreach (var item in Model.Blog.Comments)
+                                    @foreach (var item in Model.Blog.Comments)
                                     {
                                         <li>
                                             <div class="author-avatar">
                                                 <img src="assets/img/blog/" alt="">
                                             </div>
                                             <div class="comment-body">
-                                                <span class="reply-btn"><a asp-action ="delete" asp-route-id ="@item.Id">Delete</a></span>
+
+                                                @if (item.AppUserId == ViewBag.UserId)
+                                                {
+                                                    <span class="reply-btn">
+
+                                                        <a asp-action="delete" asp-route-id="@item.Id">Delete</a>
+
+                                                    </span>
+                                                }
+
                                                 <h5 class="comment-author">@item.AppUser.FullName</h5>
                                                 <div class="comment-post-date">
                                                     @item.CreatedDate.ToString("MM/dd/yyyy")
@@ -166,8 +175,8 @@
                                             </div>
                                         </li>
                                     }
-                                   
-                                  
+
+
                                 </ul>
                             </div>
                             <!-- comment area end -->
@@ -179,11 +188,11 @@
                                     <div class="comment-post-box">
                                         <div class="row">
                                             <div class="col-12">
-                                                <input type="hidden" name="blogId" value="@Model.Blog.Id"/>
+                                                <input type="hidden" name="blogId" value="@Model.Blog.Id" />
                                                 <label>Comment</label>
                                                 <textarea name="commentMessage" placeholder="Write a comment"></textarea>
                                             </div>
-                                           
+
                                             <div class="col-12">
                                                 <div class="coment-btn">
                                                     <input class="btn" type="submit" name="submit" value="POST COMMENT">

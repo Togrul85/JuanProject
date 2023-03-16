@@ -22,8 +22,14 @@ namespace JuanProject.Controllers
             return View();
         }
 
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
+            ViewBag.UserId = null;
+            if (User.Identity.IsAuthenticated)
+            {
+             AppUser   user = await _userManager.FindByNameAsync(User.Identity.Name);
+                ViewBag.UserId = user.Id;
+            }
             BlogDetail blogDetailVM = new()
             {
                 Blog = _context.Blogs
@@ -41,9 +47,11 @@ namespace JuanProject.Controllers
         public async Task<IActionResult> AddComment(string commentMessage,int blogId)
         {
             AppUser user = null;
+            ViewBag.UserId = null;
             if (User.Identity.IsAuthenticated)
             {
                  user = await _userManager.FindByNameAsync(User.Identity.Name);
+                ViewBag.UserId =user.Id;
             }
             else
             {
