@@ -175,25 +175,15 @@
                             <div class="blog-comment-wrapper">
                                 <h5>Leave A Reply</h5>
                                 <p>Email address will not be published. Required fields are marked *</p>
-                                <form action="#">
+                                <form asp-action="addcomment" method="post">
                                     <div class="comment-post-box">
                                         <div class="row">
                                             <div class="col-12">
+                                                <input type="hidden" name="blogId" value="@Model.Blog.Id"/>
                                                 <label>Comment</label>
-                                                <textarea name="commnet" placeholder="Write a comment"></textarea>
+                                                <textarea name="commentMessage" placeholder="Write a comment"></textarea>
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <label>Name</label>
-                                                <input type="text" class="coment-field" placeholder="Name">
-                                            </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <label>Email</label>
-                                                <input type="text" class="coment-field" placeholder="Email">
-                                            </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <label>Website</label>
-                                                <input type="text" class="coment-field" placeholder="Website">
-                                            </div>
+                                           
                                             <div class="col-12">
                                                 <div class="coment-btn">
                                                     <input class="btn" type="submit" name="submit" value="POST COMMENT">
