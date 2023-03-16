@@ -21,5 +21,32 @@ namespace JuanProject.DAL
         //{
         //    base.OnModelCreating(modelBuilder);
         //}
+
+        public override int SaveChanges()
+        {
+            var data = ChangeTracker.Entries<Comment>();
+            foreach (var item in data)
+            {
+                switch (item.State)
+                {
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    case EntityState.Deleted:
+                        //item.Entity.DeletedAt= DateTime.Now;
+                        break;
+                    case EntityState.Modified:
+                        //item.Entity.UpdateDate= DateTime.Now;
+                        break;
+                    case EntityState.Added:
+                        item.Entity.CreatedDate= DateTime.Now;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return base.SaveChanges();
+        }
     }
 }
