@@ -17,6 +17,7 @@ namespace JuanProject.Controllers
             _context = context;
         }
 
+
         public async Task<IActionResult> Index()
         {
             List<Slider> sliders = await _context.Sliders.Where(m => !m.IsDeleted).ToListAsync();
@@ -33,7 +34,7 @@ namespace JuanProject.Controllers
                 Blogs =  await _context.Blogs.ToListAsync(),
             };
 
-            return View(homeVM);    
+            return View(homeVM);  
           
         }
 

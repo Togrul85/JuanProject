@@ -1,4 +1,4 @@
-﻿@model BlogDetail;
+﻿@model BlogDetail
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayout.cshtml";
@@ -136,92 +136,38 @@
                                     <ul class="blog-meta">
                                         <li><span>By: </span>@Model.Blog.AuthorName</li>
                                         <li><span>On: </span>@Model.Blog.CreatedDate.ToString("MM/dd/yyyy")</li>
-                                    </ul>
+                                    </ul>                        
+                                   
                                     <p>
-                                        Bigger ipsum dolor sit amet consectetur adipisicing elit. Voluptate perferendis
-                                        consequuntur illo aliquid nihil ad neque, debitis praesentium libero ullam
-                                        asperiores exercitationem deserunt inventore facilis, officiis,
-                                    </p>
-                                    <blockquote>
-                                        <p>
-                                            Quisque semper nunc vitae erat pellentesque, ac placerat arcu consectetur.
-                                            venenatis elit ac ultrices convallis. Duis est nisi, tincidunt ac urna sed,
-                                            cursus blandit lectus. In ullamcorper sit amet ligula ut eleifend. Proin
-                                            dictum
-                                            tempor ligula, ac feugiat metus. Sed finibus tortor eu scelerisque
-                                            scelerisque.
-                                        </p>
-                                    </blockquote>
-                                    <p>
-                                        aliquam maiores asperiores recusandae commodi blanditiis ipsum tempora culpa
-                                        possimus assumenda ab quidem a voluptatum quia natus? Ex neque, saepe
-                                        reiciendis
-                                        quasi velit perspiciatis error vel quas quibusdam autem nesciunt voluptas odit
-                                        quis
-                                        dignissimos eos aspernatur voluptatum est repellat. Pariatur praesentium,
-                                        corrupti
-                                        deserunt ducimus quo doloremque nostrum aspernatur saepe cupiditate sit autem
-                                        exercitationem debitis, maiores vitae perferendis nemo? Voluptas illo, animi
-                                        temporibus quod earum molestias eaque, iure rem amet autem dignissimos officia
-                                        dolores numquam distinctio esse voluptates optio pariatur aspernatur omnis?
-                                        Ipsam
-                                        qui commodi velit natus reiciendis quod quibusdam nemo eveniet similique animi!
+                                       @Model.Blog.Desc
                                     </p>
                                 </div>
                             </div>
                             <!-- blog single item start -->
                             <!-- comment area start -->
                             <div class="comment-section section-padding">
-                                <h5>03 Comment</h5>
+                                <h5>@Model.Blog.Comments.Count Comment</h5>
                                 <ul>
-                                    <li>
-                                        <div class="author-avatar">
-                                            <img src="assets/img/blog/comment-icon.png" alt="">
-                                        </div>
-                                        <div class="comment-body">
-                                            <span class="reply-btn"><a href="#">Reply</a></span>
-                                            <h5 class="comment-author">Admin</h5>
-                                            <div class="comment-post-date">
-                                                15 Dec, 2019 at 9:30pm
+                                   @foreach (var item in Model.Blog.Comments)
+                                    {
+                                        <li>
+                                            <div class="author-avatar">
+                                                <img src="assets/img/blog/" alt="">
                                             </div>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores
-                                                adipisci optio ex, laboriosam facilis non pariatur itaque illo sunt?
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="comment-children">
-                                        <div class="author-avatar">
-                                            <img src="assets/img/blog/comment-icon.png" alt="">
-                                        </div>
-                                        <div class="comment-body">
-                                            <span class="reply-btn"><a href="#">Reply</a></span>
-                                            <h5 class="comment-author">Admin</h5>
-                                            <div class="comment-post-date">
-                                                20 Nov, 2019 at 9:30pm
+                                            <div class="comment-body">
+                                                <span class="reply-btn"><a asp-action ="delete" asp-route-id ="@item.Id">Delete</a></span>
+                                                <h5 class="comment-author">@item.AppUser.FullName</h5>
+                                                <div class="comment-post-date">
+                                                    @item.CreatedDate.ToString("MM/dd/yyyy")
+                                                </div>
+                                                <p>
+                                                    @item.Message
+                                                </p>
                                             </div>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores
-                                                adipisci optio ex, laboriosam facilis non pariatur itaque illo sunt?
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="author-avatar">
-                                            <img src="assets/img/blog/comment-icon.png" alt="">
-                                        </div>
-                                        <div class="comment-body">
-                                            <span class="reply-btn"><a href="#">Reply</a></span>
-                                            <h5 class="comment-author">Admin</h5>
-                                            <div class="comment-post-date">
-                                                25 Jan, 2019 at 9:30pm
-                                            </div>
-                                            <p>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores
-                                                adipisci optio ex, laboriosam facilis non pariatur itaque illo sunt?
-                                            </p>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    }
+                                   
+                                  
                                 </ul>
                             </div>
                             <!-- comment area end -->
